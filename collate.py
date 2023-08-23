@@ -30,8 +30,18 @@ def main():
         with open(json_filename, 'w', encoding='utf-8') as jsonfile:
             json.dump(all_json_data, jsonfile, indent=4)
 
+    single_json_data = []
+    single_json_filename = 'advisory_data.json'
+     
+    for file in os.listdir(script_folder):
+        if file.startswith("advisory_data2"):
+            file_path = os.path.join(script_folder, file)
+            with open(file_path, "r") as json_file:
+                data = json.load(json_file)
+                single_json_data.append(data)
     
-    
+    with open(single_json_filename, "w") as output_json:
+        json.dump(single_json_data, output_json, indent=4)
 
 if __name__ == "__main__":
     main()
